@@ -13,7 +13,8 @@ let streamifier = require('streamifier');
 cloudinary.config({ 
     cloud_name: 'dduqolszr', 
     api_key: '193768688454844', 
-    api_secret: 'pyytoaC1d_p4egBEQy5TzRzi5y0' 
+    api_secret: 'pyytoaC1d_p4egBEQy5TzRzi5y0',
+    secure: true
 });
 module.exports = function(router){
     router.get('/employees', async (req, res, next) => {
