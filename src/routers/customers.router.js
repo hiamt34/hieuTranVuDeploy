@@ -168,14 +168,16 @@ module.exports = function(router){
             beginOfDay.setHours(0, 0, 0, 0);
             const endOfDay = new Date(q.day);
             endOfDay.setHours(23, 59, 59, 999);
-            q['createdAt'] = {
+
+            let queryDay = {};
+            queryDay['createAt'] = {
                 "$gte": beginOfDay,
                 "$lt": endOfDay
             }
             delete q.day;
 
             await mongo.open();
-            let cunstomers = await checkInSchema.find(q).populate('cusId').populate('roomId').lean();
+            let cunstomers = await checkInSchema.find(queryDay).populate('cusId').populate('roomId').lean();
             if (req.headers.hotelid) {
                 cunstomers = cunstomers.filter(item => item.roomId.hotelId == req.headers.hotelid)
             }
